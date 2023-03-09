@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.pratiti.entity.QuestionOption;
 import com.pratiti.entity.Subject;
+import com.pratiti.exception.CustomerServiceException;
 import com.pratiti.model.QuestionDto;
 import com.pratiti.model.SubjectDto;
 import com.pratiti.repository.QuestionOptionRepository;
@@ -30,5 +32,8 @@ public class OnlineExamController {
 	public String addSubjectWithQuestionsAndOptions(@RequestBody SubjectDto subjectDto) {
 		return onlineExamService.addSubjectWithQuestionsAndOptions(subjectDto);
 	}
-	
+	@GetMapping("/remove-subject")
+	public String removeSubject(@RequestParam("subjectName") String subjectName) {
+		return onlineExamService.removeSubject(subjectName);
+	}
 }

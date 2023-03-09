@@ -107,5 +107,4 @@ public class QuestionOption {
 
 	private Integer isCorrect;
 
-
 }

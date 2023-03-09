@@ -2,14 +2,17 @@ package com.pratiti.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+
 import com.pratiti.entity.QuestionOption;
 import com.pratiti.entity.Subject;
+import com.pratiti.exception.CustomerServiceException;
 import com.pratiti.model.QuestionDto;
 import com.pratiti.model.SubjectDto;
 import com.pratiti.repository.QuestionOptionRepository;
@@ -49,4 +52,18 @@ public class OnlineExamService {
 		 return "Subject with questions and options added successfully";
 
 	 }
+	
+	
+	public String removeSubject(String subject) {
+		if(subjectRepository.existsBySubjectName(subject) == true) {
+			Optional<Subject> s = subjectRepository.findBySubjectName(subject);
+			Subject subject1 = s.get();
+			System.out.println(subject1.getSubjectId());
+			questionOptionRepository.deleteBySubjectSubjectId(subject1.getSubjectId());
+			return "subject deleted";
+		}
+		else {
+			return "Subject not exists.";
+		}
+	}
 }
