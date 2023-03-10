@@ -22,7 +22,7 @@ public class Scorecard {
     @JoinColumn(name = "studentId", referencedColumnName = "userId")
     private User student;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "subjectId", referencedColumnName = "subjectId")
     private Subject subject;
     
