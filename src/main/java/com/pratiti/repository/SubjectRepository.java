@@ -13,6 +13,6 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 	
 	public Optional<Subject> findBySubjectName(String subjectName);
 	
-
+	
 }
 

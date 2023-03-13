@@ -16,8 +16,6 @@ public class Subject {
 
 	private String subjectName;
 
-	private Integer subjectNoOfQuestions;
-
 	public Integer getSubjectId() {
 		return subjectId;
 	}
@@ -34,13 +32,7 @@ public class Subject {
 		this.subjectName = subjectName;
 	}
 
-	public Integer getSubjectNoOfQuestions() {
-		return subjectNoOfQuestions;
-	}
 
-	public void setSubjectNoOfQuestions(Integer subjectNoOfQuestions) {
-		this.subjectNoOfQuestions = subjectNoOfQuestions;
-	}
 
 	
 

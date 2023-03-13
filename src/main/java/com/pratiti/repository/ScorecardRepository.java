@@ -12,6 +12,9 @@ import com.pratiti.entity.Scorecard;
 
 @Repository
 public interface ScorecardRepository extends JpaRepository<Scorecard, Integer> {
+
+	@Query("select sc from Scorecard sc where sc.subject.subjectId=?1 and sc.student.userId=?2")
+	Optional<Scorecard> findBySubjectIdAndUserId(Integer id, Integer userId);
 	 
 	
 }

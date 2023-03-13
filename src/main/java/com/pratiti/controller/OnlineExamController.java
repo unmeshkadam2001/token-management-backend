@@ -21,6 +21,7 @@ import com.pratiti.entity.User;
 import com.pratiti.exception.CustomerServiceException;
 import com.pratiti.model.QuestionDto;
 import com.pratiti.model.SubjectDto;
+import com.pratiti.model.UserDetails;
 import com.pratiti.model.UserParameter;
 import com.pratiti.repository.QuestionOptionRepository;
 import com.pratiti.repository.SubjectRepository;
@@ -49,8 +50,20 @@ public class OnlineExamController {
 //		return onlineExamService.fetchUser(userParameter);
 //	}
 	
-	@GetMapping("/subject/{subjectName}/level/{level}/score/{levelScore}")
-    public List<User> getUsersBySubjectAndScore(@PathVariable String subjectName, @PathVariable Integer level , @PathVariable Integer levelScore) {
-        return onlineExamService.getUsersBySubjectAndScore(subjectName, level , levelScore);
+//	@GetMapping("/subject/{subjectName}/level/{level}/score/{levelScore}")
+//    public List<User> getUsersBySubjectAndScore(@PathVariable String subjectName, @PathVariable Integer level , @PathVariable Integer levelScore) {
+//        return onlineExamService.getUsersBySubjectAndScore(subjectName, level , levelScore);
+//    }
+	
+	
+	@GetMapping("/subject/{subjectName}")
+    public List<UserDetails> getUsersScoreBySubject(@PathVariable String subjectName) {
+        return onlineExamService.getUsersScoreBySubject(subjectName);
     }
+	
+	
+	@GetMapping("/selectedAnswer/{selectedAnswer}/questionId/{questionId}/userid/{userid}")
+	public String updateTheExamTable(@PathVariable Integer selectedAnswer, @PathVariable Integer questionId , @PathVariable Integer userid) {
+		return onlineExamService.updateTheExamTable(selectedAnswer,questionId,userid);
+	}
 }

@@ -1,5 +1,7 @@
 package com.pratiti.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -13,4 +15,7 @@ public interface QuestionOptionRepository extends JpaRepository<QuestionOption, 
 	@Modifying
 	@Query("update QuestionOption q set q.Status=?1 where q.subject.subjectId=?2")
 	void updateBysubjectId(String status , Integer subjectId);
+	
+	
+	Optional<QuestionOption> findById(Integer id);
 }
