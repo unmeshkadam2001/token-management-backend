@@ -1,5 +1,6 @@
 package com.pratiti.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ public class Service {
 
     private String serviceName;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "type_of_service_id", referencedColumnName = "id")
     private ServiceType serviceType;
 
