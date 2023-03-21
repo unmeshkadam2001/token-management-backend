@@ -1,5 +1,6 @@
 package com.pratiti.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,11 +20,11 @@ public class Counter {
     @Column(name = "counter_id")
     private int counterId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "service_type_id", referencedColumnName = "id")
     private ServiceType serviceType;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "counter_executive_id", referencedColumnName = "counter_executive_id")
     private CounterExecutive counterExecutive;
 
