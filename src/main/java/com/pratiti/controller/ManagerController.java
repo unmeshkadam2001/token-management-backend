@@ -1,5 +1,9 @@
 package com.pratiti.controller;
 
+
+public class ManagerController {
+
+	
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
