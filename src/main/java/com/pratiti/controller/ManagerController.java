@@ -1,15 +1,21 @@
 package com.pratiti.controller;
 
+	
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pratiti.entity.Counter;
+import com.pratiti.entity.Service;
 import com.pratiti.entity.ServiceType;
 import com.pratiti.model.CounterDTO;
 import com.pratiti.model.ServiceDTO;
@@ -59,5 +65,5 @@ public class ManagerController {
     	return managerService.assignCounter(counterDTO);
     }
 
-    
+
 }

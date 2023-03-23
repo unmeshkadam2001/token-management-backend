@@ -32,12 +32,14 @@ public class TokenDetails {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="hh:mm")
     @Column(name = "expected_wait_time")
     @Temporal(TemporalType.TIME)
-    private Date expectedWaitTime;
-    
     @DateTimeFormat(style = "hh:mm")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="hh:mm")
+    private Date expectedWaitTime;
+    
     @Column(name = "token_generation_time")
     @CreationTimestamp
+    @DateTimeFormat(style = "hh:mm")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="hh:mm")
     private Date tokenGenerationTime;
 
     @Column(name = "status")

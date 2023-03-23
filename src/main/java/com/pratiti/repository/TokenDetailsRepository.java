@@ -12,6 +12,4 @@ public interface TokenDetailsRepository extends JpaRepository<TokenDetails, Inte
 	@Query("select t from TokenDetails t where t.service.serviceType.id=?1")
 	List<TokenDetails> findByServiceId(Integer serviceId);
 
-	
-
 }

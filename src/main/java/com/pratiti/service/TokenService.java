@@ -5,6 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.pratiti.entity.TokenDetails;
 import com.pratiti.repository.CounterRepository;
+
+import com.pratiti.entity.ServiceType;
+import com.pratiti.entity.TokenDetails;
+import com.pratiti.repository.CounterRepository;
+import com.pratiti.repository.ServiceTypeRepository;
 import com.pratiti.repository.TokenDetailsRepository;
 
 @Service
@@ -14,6 +19,8 @@ public class TokenService {
 	TokenDetailsRepository tokenDetailsRepo;
 	@Autowired 
 	CounterRepository counterRepo;
+	@Autowired
+	private ServiceTypeRepository serviceTypeRepository;
 	
 	public String generateToken(TokenDetails tokenDetails) {
 		System.out.println("we are inside service of generate token");
@@ -28,4 +35,13 @@ public class TokenService {
 		System.out.println("Service is returning the list");
 		return tempQueue;
 	}
+	public List<ServiceType> getServicesTypesForTokenGeneration() {
+		List<ServiceType>st = serviceTypeRepository.findAll();
+		for(ServiceType s : st) {
+			System.out.println(s.getTypeOfService());
+		}
+		return st;
+	}
+
+	
 }
