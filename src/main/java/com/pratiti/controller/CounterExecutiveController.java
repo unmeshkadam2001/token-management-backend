@@ -25,7 +25,7 @@ public class CounterExecutiveController {
 	public LoginStatus loginCounterExecutive(@RequestBody LoginData loginData ) {
 		LoginStatus status = new LoginStatus();
 		System.out.println(loginData.getName());
-		System.out.println("HI874857429875987428");
+		
 		try {
 			CounterExecutive counterExecutive = counterExecutiveService.login(loginData.getName(), loginData.getPassword());
 			if(counterExecutive == null) {
@@ -34,9 +34,9 @@ public class CounterExecutiveController {
 				return status;
 			}
 			status.setName(counterExecutive.getName());
+			status.setId(counterExecutive.getCounterExecutiveId());
 			status.setMessage("Credentials Matched Successfully...!");
 			status.setStatus(true);
-			status.setId(counterExecutive.getCounterExecutiveId());
 		}catch(CustomerServiceException e) {
 			status.setMessage("Credentials Entered By you doesn't  matched...!");
 			status.setStatus(false);

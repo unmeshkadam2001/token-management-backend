@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pratiti.entity.CounterExecutive;
+import com.pratiti.entity.TokenDetails;
 import com.pratiti.exception.CustomerServiceException;
 import com.pratiti.repository.CounterExecutiveRepository;
 
@@ -26,6 +27,11 @@ public class CounterExecutiveService {
 				return a;
 			}			
 		}
+		return null;
+	}
+
+	public TokenDetails nextToken(int counterId, int tokenId) {
+		
 		return null;
 	}
 		
