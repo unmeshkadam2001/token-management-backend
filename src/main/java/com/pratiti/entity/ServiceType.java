@@ -24,6 +24,18 @@ public class ServiceType {
 
     @OneToMany(mappedBy = "serviceType")
     private List<Service> services;
+    
+    private String statusOfServiceType;
+    
+    
+
+	public String getStatusOfServiceType() {
+		return statusOfServiceType;
+	}
+
+	public void setStatusOfServiceType(String statusOfServiceType) {
+		this.statusOfServiceType = statusOfServiceType;
+	}
 
 	public int getId() {
 		return id;

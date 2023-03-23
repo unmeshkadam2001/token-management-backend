@@ -3,9 +3,11 @@ package com.pratiti.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Queue;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pratiti.model.*;
 import com.pratiti.entity.Counter;
@@ -33,6 +35,7 @@ public class ManagerService {
     public String addService(ServiceTypeDTO serviceTypeDTO) {
         // Create a new ServiceType entity
         ServiceType serviceType = new ServiceType();
+        serviceType.setStatusOfServiceType("Not assigned");
         serviceType.setTypeOfService(serviceTypeDTO.getTypeOfService());
 
         // Create a list of Service entities
@@ -53,11 +56,11 @@ public class ManagerService {
         // Save the ServiceType entity with its associated Services
         serviceTypeRepository.save(serviceType);
 
-        return "Inserted";
+        return "Servies added successfully!";
     }
 
 	public List<ServiceType> getServicesTypes() {
-		List<ServiceType>st = serviceTypeRepository.fetchAll();
+		List<ServiceType>st = serviceTypeRepository.fetchAllNotAssigned("Not assigned");
 		for(ServiceType s : st) {
 			System.out.println(s.getTypeOfService());
 		}
@@ -68,8 +71,12 @@ public class ManagerService {
 //		return "counter is assignes";
 //	}
 	
+	@Transactional
 	public String assignCounter(CounterDTO counterDTO) {
         Optional<ServiceType> serviceType = serviceTypeRepository.findById(counterDTO.getServiceTypeId());
+        ServiceType s = serviceType.get();
+        
+        serviceRepository.updateStatusOfServiceType("assigned" , s.getId());
 
         CounterExecutive counterExecutive = new CounterExecutive();
         counterExecutive.setName(counterDTO.getCounterExecutiveName());

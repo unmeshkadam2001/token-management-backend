@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.pratiti.entity.ServiceType;
 
 public interface ServiceTypeRepository extends JpaRepository<ServiceType, Integer> {
-	@Query("select st from ServiceType st")
-	List<ServiceType> fetchAll();
+	
+	@Query("select st from ServiceType st where st.statusOfServiceType=?1")
+	List<ServiceType> fetchAllNotAssigned(String s);
 }
