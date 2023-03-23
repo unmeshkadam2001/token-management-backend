@@ -28,8 +28,6 @@ public class TokenDetails {
     @Column(name = "token_id")
     private int tokenId;
 
-    @DateTimeFormat(style = "hh:mm")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="hh:mm")
     @Column(name = "expected_wait_time")
     @Temporal(TemporalType.TIME)
     @DateTimeFormat(style = "hh:mm")

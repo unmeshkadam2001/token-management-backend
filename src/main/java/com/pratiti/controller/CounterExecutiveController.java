@@ -44,9 +44,10 @@ public class CounterExecutiveController {
 		return status;		
 	}
 	
-	@GetMapping("/sayHi")
-	public String hi() {
+	@GetMapping("/CEId")
+	public Integer getCEId(@RequestParam("id")Integer CEid) {
 		
-		return "You just hitted hi function";
+		
+		return counterExecutiveService.getCounterExecutiveId(CEid);
 	}
 }

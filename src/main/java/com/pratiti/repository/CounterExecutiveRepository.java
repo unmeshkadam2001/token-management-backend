@@ -3,6 +3,7 @@ package com.pratiti.repository;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.pratiti.entity.CounterExecutive;
 
@@ -15,6 +16,4 @@ public interface CounterExecutiveRepository extends JpaRepository<CounterExecuti
 	public boolean existsByName(String name);
 
 	public Optional<CounterExecutive> findByName(String name);
-
-
 }

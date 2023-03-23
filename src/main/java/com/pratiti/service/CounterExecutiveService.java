@@ -10,6 +10,7 @@ import com.pratiti.entity.CounterExecutive;
 import com.pratiti.entity.TokenDetails;
 import com.pratiti.exception.CustomerServiceException;
 import com.pratiti.repository.CounterExecutiveRepository;
+import com.pratiti.repository.CounterRepository;
 
 
 @Service
@@ -17,6 +18,8 @@ public class CounterExecutiveService {
 
 	@Autowired
 	CounterExecutiveRepository counterExecutiveRepository;
+	@Autowired
+	CounterRepository counterRepository;
 	
 	public CounterExecutive login(String name, String password) {
 		
@@ -33,6 +36,11 @@ public class CounterExecutiveService {
 	public TokenDetails nextToken(int counterId, int tokenId) {
 		
 		return null;
+	}
+
+	public Integer getCounterExecutiveId(Integer CEid) {
+		return counterRepository.findByCounterExecutiveId(CEid);
+		
 	}
 		
 //		Optional<CounterExecutive> counterExecutiveData = counterExecutiveRepository.findByName(name);

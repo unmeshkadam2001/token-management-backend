@@ -1,18 +1,22 @@
 package com.pratiti.controller;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pratiti.entity.ServiceType;
 import com.pratiti.entity.TokenDetails;
 import com.pratiti.model.ServiceDTO;
+import com.pratiti.model.TokenDTO;
 import com.pratiti.model.ServiceTypeDTO;
 import com.pratiti.repository.TokenDetailsRepository;
 import com.pratiti.service.TokenService;
@@ -32,6 +36,7 @@ public class TokenController {
 		System.out.println("we are inside generating token");
 		return tokenService.generateToken(tokenDetails);				
 	}
+	
 	
 	@GetMapping("/requestingQueue")
 	public Queue<TokenDTO> returnQueueOfTokens(@RequestParam("counterId") Integer counterId ){
