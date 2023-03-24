@@ -37,7 +37,6 @@ public class TokenController {
 		return tokenService.generateToken(tokenDetails);				
 	}
 	
-	
 	@GetMapping("/requestingQueue")
 	public Queue<TokenDTO> returnQueueOfTokens(@RequestParam("counterId") Integer counterId ){
 		List<TokenDetails> list = tokenService.queueOfTokens(counterId);
@@ -52,23 +51,14 @@ public class TokenController {
 			obj.setTokenId(t.getTokenId());
 			obj.setServiceDescription(t.getService().getServiceName());
 			list2.add(obj);
-			if(t.getStatus().equals("ACTIVE"))
+			if(t.getStatus().equals("ACTIVE")) {
 				q.add(obj);
+			}
 		}
 		System.out.println("Controller is returning the list");
 		
 		return q;				
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@GetMapping("/getServicesTypesForTokenGeneration")
 	public List<ServiceTypeDTO> getServicesTypesForTokenGeneration() {
@@ -90,6 +80,44 @@ public class TokenController {
             serviceTypeDTOs.add(serviceTypeDTO);
         }
         return serviceTypeDTOs;
+	}
+	
+
+	@GetMapping("/requestingWaitingQueue")
+	public Queue<TokenDTO> returnWaitingQueueOfTokens(@RequestParam("counterId") Integer counterId ){
+		List<TokenDetails> list = tokenService.queueOfTokens(counterId);
+		List<TokenDTO> list2 = new LinkedList<>();
+		Queue<TokenDTO> waitingQueue = new LinkedList<>();
+		for(TokenDetails t : list) {
+			TokenDTO obj = new TokenDTO();
+			obj.setServiceId(t.getService().getServiceId());
+			obj.setExpectedWaitTime(t.getExpectedWaitTime());
+			obj.setStatus(t.getStatus());
+			obj.setTokenGenerationTime(t.getTokenGenerationTime());
+			obj.setTokenId(t.getTokenId());
+			obj.setServiceDescription(t.getService().getServiceName());
+			list2.add(obj);
+			if(t.getStatus().equals("WAITING")) {
+				waitingQueue.add(obj);
+			}
+		}
+		System.out.println("Controller is returning the waitingQueue");
+		
+		return waitingQueue;			
+		}
+	
+	@GetMapping("/statusWaiting")
+	public String changeStatusToWaiting(@RequestParam("tokenId") Integer tokenId ) {
+		String msg = tokenService.changeStatusToWaiting(tokenId);
+		
+		return msg;
+	}
+	
+	@GetMapping("/resolved")
+	public String resolved(@RequestParam("tokenId") Integer tokenId ) {
+		String msg = tokenService.resolved(tokenId);
+		
+		return msg;
 	}
 	
 }

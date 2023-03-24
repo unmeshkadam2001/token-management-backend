@@ -42,6 +42,24 @@ public class TokenService {
 		}
 		return st;
 	}
+	
+	public String changeStatusToWaiting(int tokenId) {
+		
+		TokenDetails tokenDetails = tokenDetailsRepo.findById(tokenId).get();
+		tokenDetails.setStatus("WAITING");
+		tokenDetailsRepo.save(tokenDetails);
+		
+		return "status of token with token id "+ tokenId + "is changed to waiting";
+	}
+	
+	public String resolved(int tokenId) {
+
+		TokenDetails tokenDetails = tokenDetailsRepo.findById(tokenId).get();
+		tokenDetails.setStatus("RESOLVED");
+		tokenDetailsRepo.save(tokenDetails);
+		
+		return "status of token with token id "+ tokenId + " is changed to resolved";
+	}
 
 	
 }
