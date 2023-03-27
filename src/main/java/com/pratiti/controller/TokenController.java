@@ -27,22 +27,22 @@ public class TokenController {
 
 	@Autowired
 	private TokenDetailsRepository tokenDetailsRepo;
-	
+
 	@Autowired
 	private TokenService tokenService;
-	
+
 	@PostMapping("/generateToken")
 	public String insertTokenInDatabase(@RequestBody TokenDetails tokenDetails) {
 		System.out.println("we are inside generating token");
-		return tokenService.generateToken(tokenDetails);				
+		return tokenService.generateToken(tokenDetails);
 	}
-	
+
 	@GetMapping("/requestingQueue")
-	public Queue<TokenDTO> returnQueueOfTokens(@RequestParam("counterId") Integer counterId ){
+	public Queue<TokenDTO> returnQueueOfTokens(@RequestParam("counterId") Integer counterId) {
 		List<TokenDetails> list = tokenService.queueOfTokens(counterId);
 		List<TokenDTO> list2 = new LinkedList<>();
 		Queue<TokenDTO> q = new LinkedList<>();
-		for(TokenDetails t : list) {
+		for (TokenDetails t : list) {
 			TokenDTO obj = new TokenDTO();
 			obj.setServiceId(t.getService().getServiceId());
 			obj.setExpectedWaitTime(t.getExpectedWaitTime());
@@ -51,44 +51,21 @@ public class TokenController {
 			obj.setTokenId(t.getTokenId());
 			obj.setServiceDescription(t.getService().getServiceName());
 			list2.add(obj);
-			if(t.getStatus().equals("ACTIVE")) {
+			if (t.getStatus().equals("ACTIVE")) {
 				q.add(obj);
 			}
 		}
 		System.out.println("Controller is returning the list");
-		
-		return q;				
+
+		return q;
 	}
-	
-	@GetMapping("/getServicesTypesForTokenGeneration")
-	public List<ServiceTypeDTO> getServicesTypesForTokenGeneration() {
-		List<ServiceType> serviceTypes = tokenService.getServicesTypesForTokenGeneration();
-        List<ServiceTypeDTO> serviceTypeDTOs = new ArrayList<>();
-        for (ServiceType serviceType : serviceTypes) {
-            ServiceTypeDTO serviceTypeDTO = new ServiceTypeDTO();
-            serviceTypeDTO.setId(serviceType.getId());
-            serviceTypeDTO.setTypeOfService(serviceType.getTypeOfService());
-            List<ServiceDTO> serviceDTOs = new ArrayList<>();
-            for (com.pratiti.entity.Service service : serviceType.getServices()) {
-                ServiceDTO serviceDTO = new ServiceDTO();
-                serviceDTO.setId(service.getServiceId());
-                serviceDTO.setServiceName(service.getServiceName());
-                serviceDTO.setStatusOfService(service.getStatusOfService());
-                serviceDTOs.add(serviceDTO);
-            }
-            serviceTypeDTO.setServices(serviceDTOs);
-            serviceTypeDTOs.add(serviceTypeDTO);
-        }
-        return serviceTypeDTOs;
-	}
-	
 
 	@GetMapping("/requestingWaitingQueue")
-	public Queue<TokenDTO> returnWaitingQueueOfTokens(@RequestParam("counterId") Integer counterId ){
+	public Queue<TokenDTO> returnWaitingQueueOfTokens(@RequestParam("counterId") Integer counterId) {
 		List<TokenDetails> list = tokenService.queueOfTokens(counterId);
 		List<TokenDTO> list2 = new LinkedList<>();
 		Queue<TokenDTO> waitingQueue = new LinkedList<>();
-		for(TokenDetails t : list) {
+		for (TokenDetails t : list) {
 			TokenDTO obj = new TokenDTO();
 			obj.setServiceId(t.getService().getServiceId());
 			obj.setExpectedWaitTime(t.getExpectedWaitTime());
@@ -97,27 +74,46 @@ public class TokenController {
 			obj.setTokenId(t.getTokenId());
 			obj.setServiceDescription(t.getService().getServiceName());
 			list2.add(obj);
-			if(t.getStatus().equals("WAITING")) {
+			if (t.getStatus().equals("WAITING")) {
 				waitingQueue.add(obj);
 			}
 		}
 		System.out.println("Controller is returning the waitingQueue");
-		
-		return waitingQueue;			
+		return waitingQueue;
+	}
+
+	@GetMapping("/getServicesTypesForTokenGeneration")
+	public List<ServiceTypeDTO> getServicesTypesForTokenGeneration() {
+		List<ServiceType> serviceTypes = tokenService.getServicesTypesForTokenGeneration();
+		List<ServiceTypeDTO> serviceTypeDTOs = new ArrayList<>();
+		for (ServiceType serviceType : serviceTypes) {
+			ServiceTypeDTO serviceTypeDTO = new ServiceTypeDTO();
+			serviceTypeDTO.setId(serviceType.getId());
+			serviceTypeDTO.setTypeOfService(serviceType.getTypeOfService());
+			List<ServiceDTO> serviceDTOs = new ArrayList<>();
+			for (com.pratiti.entity.Service service : serviceType.getServices()) {
+				ServiceDTO serviceDTO = new ServiceDTO();
+				serviceDTO.setId(service.getServiceId());
+				serviceDTO.setServiceName(service.getServiceName());
+				serviceDTO.setStatusOfService(service.getStatusOfService());
+				serviceDTOs.add(serviceDTO);
+			}
+			serviceTypeDTO.setServices(serviceDTOs);
+			serviceTypeDTOs.add(serviceTypeDTO);
 		}
-	
+		return serviceTypeDTOs;
+	}
+
 	@GetMapping("/statusWaiting")
-	public String changeStatusToWaiting(@RequestParam("tokenId") Integer tokenId ) {
+	public String changeStatusToWaiting(@RequestParam("tokenId") Integer tokenId) {
 		String msg = tokenService.changeStatusToWaiting(tokenId);
-		
 		return msg;
 	}
-	
+
 	@GetMapping("/resolved")
-	public String resolved(@RequestParam("tokenId") Integer tokenId ) {
+	public String resolved(@RequestParam("tokenId") Integer tokenId) {
 		String msg = tokenService.resolved(tokenId);
-		
 		return msg;
 	}
-	
+
 }
