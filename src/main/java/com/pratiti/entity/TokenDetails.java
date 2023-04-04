@@ -51,8 +51,7 @@ public class TokenDetails {
     @JoinColumn(name = "queue_id", referencedColumnName = "queue_id")
     private TokenQueue tokenQueue;
     
-    private Integer count;
-    
+    private Integer count;    
 
     public Integer getCount() {
 		return count;

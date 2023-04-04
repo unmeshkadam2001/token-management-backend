@@ -24,7 +24,7 @@ public class TokenService {
 	
 	public String generateToken(TokenDetails tokenDetails) {
 		System.out.println("we are inside service of generate token");
-		tokenDetails.setCount(0);
+		tokenDetails.setCount(3);
 		tokenDetailsRepo.save(tokenDetails);
 		return "Token Generated Succesfully!  Your Token Id is: "+ tokenDetails.getTokenId();
 	}
@@ -56,7 +56,11 @@ public class TokenService {
 	public String changeStatusToWaiting(int tokenId) {
 		
 		TokenDetails tokenDetails = tokenDetailsRepo.findById(tokenId).get();
+		System.out.println(tokenDetails.getCount());
 		tokenDetails.setStatus("WAITING");
+		int decrementCount = tokenDetails.getCount() - 1;
+		System.out.println(decrementCount);
+		tokenDetails.setCount( decrementCount );
 		tokenDetailsRepo.save(tokenDetails);
 		
 		return "status of token with token id "+ tokenId + "is changed to waiting.";
