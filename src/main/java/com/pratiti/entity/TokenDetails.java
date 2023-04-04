@@ -50,8 +50,19 @@ public class TokenDetails {
     @ManyToOne
     @JoinColumn(name = "queue_id", referencedColumnName = "queue_id")
     private TokenQueue tokenQueue;
+    
+    private Integer count;
+    
 
-    public int getTokenId() {
+    public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+	public int getTokenId() {
 		return tokenId;
 	}
 

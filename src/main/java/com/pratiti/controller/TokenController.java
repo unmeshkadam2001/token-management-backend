@@ -47,7 +47,7 @@ public class TokenController {
 			obj.setTokenId(t.getTokenId());
 			obj.setServiceDescription(t.getService().getServiceName());
 			list2.add(obj);
-			if (t.getStatus().equals("ACTIVE")) {
+			if (t.getStatus().equals("ACTIVE") && t.getCount()<3) {
 				q.add(obj);
 			}
 		}

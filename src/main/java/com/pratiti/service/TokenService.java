@@ -24,6 +24,7 @@ public class TokenService {
 	
 	public String generateToken(TokenDetails tokenDetails) {
 		System.out.println("we are inside service of generate token");
+		tokenDetails.setCount(0);
 		tokenDetailsRepo.save(tokenDetails);
 		return "Token Generated Succesfully!  Your Token Id is: "+ tokenDetails.getTokenId();
 	}

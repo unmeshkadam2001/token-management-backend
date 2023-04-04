@@ -9,7 +9,7 @@ import com.pratiti.entity.TokenDetails;
 
 public interface TokenDetailsRepository extends JpaRepository<TokenDetails, Integer>{
 
-	@Query("select t from TokenDetails t where t.service.serviceType.id=?1 order by t.tokenGenerationTime asc")
+	@Query("select t from TokenDetails t where t.service.serviceType.id=?1 and t.count<3 order by t.tokenGenerationTime asc")
 	List<TokenDetails> findByServiceId(Integer serviceId);
 	
 }
