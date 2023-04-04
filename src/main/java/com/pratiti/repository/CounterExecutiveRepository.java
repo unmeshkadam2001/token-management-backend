@@ -9,8 +9,6 @@ import com.pratiti.entity.CounterExecutive;
 
 public interface CounterExecutiveRepository extends JpaRepository<CounterExecutive, Integer> {
 
-	
-
 	public boolean existsByPassword(String password);
 
 	public boolean existsByName(String name);

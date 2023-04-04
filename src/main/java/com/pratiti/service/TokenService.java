@@ -35,6 +35,15 @@ public class TokenService {
 		System.out.println("Service is returning the list");
 		return tempQueue;
 	}
+	
+	public List<TokenDetails> queueOfTokens() {
+		List<TokenDetails> catchAll = tokenDetailsRepo.findAll();
+		if(catchAll.isEmpty())
+			return null;
+		else 
+			return catchAll;		
+	}
+	
 	public List<ServiceType> getServicesTypesForTokenGeneration() {
 		List<ServiceType>st = serviceTypeRepository.findAll();
 		for(ServiceType s : st) {
@@ -49,7 +58,7 @@ public class TokenService {
 		tokenDetails.setStatus("WAITING");
 		tokenDetailsRepo.save(tokenDetails);
 		
-		return "status of token with token id "+ tokenId + "is changed to waiting";
+		return "status of token with token id "+ tokenId + "is changed to waiting.";
 	}
 	
 	public String resolved(int tokenId) {
@@ -58,8 +67,18 @@ public class TokenService {
 		tokenDetails.setStatus("RESOLVED");
 		tokenDetailsRepo.save(tokenDetails);
 		
-		return "status of token with token id "+ tokenId + " is changed to resolved";
+		return "status of token with token id "+ tokenId + " is changed to resolved.";
 	}
+
+	public String processing(int tokenId) {
+		
+		TokenDetails tokenDetails = tokenDetailsRepo.findById(tokenId).get();
+		tokenDetails.setStatus("PROCESSING");
+		tokenDetailsRepo.save(tokenDetails);
+		return "status of token with token id "+ tokenId + " is changed to processing.";
+		
+	}
+
 
 	
 }
