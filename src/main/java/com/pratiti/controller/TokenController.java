@@ -18,15 +18,11 @@ import com.pratiti.entity.TokenDetails;
 import com.pratiti.model.ServiceDTO;
 import com.pratiti.model.TokenDTO;
 import com.pratiti.model.ServiceTypeDTO;
-import com.pratiti.repository.TokenDetailsRepository;
 import com.pratiti.service.TokenService;
 
 @RestController
 @CrossOrigin
 public class TokenController {
-
-	@Autowired
-	private TokenDetailsRepository tokenDetailsRepo;
 
 	@Autowired
 	private TokenService tokenService;
@@ -56,15 +52,23 @@ public class TokenController {
 			}
 		}
 		System.out.println("Controller is returning the list");
-
 		return q;
 	}
 
 	@GetMapping("/requestingWaitingQueue")
-	public Queue<TokenDTO> returnWaitingQueueOfTokens(@RequestParam("counterId") Integer counterId) {
-		List<TokenDetails> list = tokenService.queueOfTokens(counterId);
+	public Queue<TokenDTO> returnWaitingQueueOfTokens(@RequestParam(name="counterId",required=false) Integer counterId) {
+		
 		List<TokenDTO> list2 = new LinkedList<>();
+		List<TokenDetails> list = new LinkedList<>();
+		
 		Queue<TokenDTO> waitingQueue = new LinkedList<>();
+		
+		if(counterId != null) {
+			list = tokenService.queueOfTokens(counterId);			
+		}else {
+			list = tokenService.queueOfTokens();
+		}
+		
 		for (TokenDetails t : list) {
 			TokenDTO obj = new TokenDTO();
 			obj.setServiceId(t.getService().getServiceId());
@@ -81,7 +85,31 @@ public class TokenController {
 		System.out.println("Controller is returning the waitingQueue");
 		return waitingQueue;
 	}
-
+	
+	@GetMapping("/requestingCatchAllQueue")
+	public Queue<TokenDTO> returnCatchAllQueueOfTokens() {
+		
+		List<TokenDetails> list= tokenService.queueOfTokens();
+		List<TokenDTO> list2 = new LinkedList<>();
+		Queue<TokenDTO> catchAllQueue = new LinkedList<>();
+		
+		for(TokenDetails t : list) {
+			TokenDTO obj = new TokenDTO();
+			obj.setServiceId(t.getService().getServiceId());
+			obj.setExpectedWaitTime(t.getExpectedWaitTime());
+			obj.setStatus(t.getStatus());
+			obj.setTokenGenerationTime(t.getTokenGenerationTime());
+			obj.setTokenId(t.getTokenId());
+			obj.setServiceDescription(t.getService().getServiceName());
+			list2.add(obj);
+			if (t.getStatus().equals("ACTIVE")) {
+				catchAllQueue.add(obj);
+			}
+		}
+		System.out.println("Controller is returning the CatchAllQueue");
+		return catchAllQueue;		
+	}
+		
 	@GetMapping("/getServicesTypesForTokenGeneration")
 	public List<ServiceTypeDTO> getServicesTypesForTokenGeneration() {
 		List<ServiceType> serviceTypes = tokenService.getServicesTypesForTokenGeneration();
@@ -115,5 +143,11 @@ public class TokenController {
 		String msg = tokenService.resolved(tokenId);
 		return msg;
 	}
+	@GetMapping("/processing")
+	public String processing(@RequestParam("tokenId") Integer tokenId) {
+		String msg = tokenService.processing(tokenId);
+		return msg;
+	}
+
 
 }
