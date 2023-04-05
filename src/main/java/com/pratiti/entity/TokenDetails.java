@@ -108,8 +108,6 @@ public class TokenDetails {
 	public void setCount(Integer count) {
 		this.count = count;
 	}
-    
-
    
 
 }

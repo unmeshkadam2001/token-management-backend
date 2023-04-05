@@ -11,8 +11,17 @@ public class TokenDTO{
     private Date tokenGenerationTime;
     private String serviceDescription;
     private String status;
-
+    private int count;
     private int serviceId;
+
+    
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 	public int getTokenId() {
 		return tokenId;
