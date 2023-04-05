@@ -45,6 +45,7 @@ public class TokenController {
 			obj.setStatus(t.getStatus());
 			obj.setTokenGenerationTime(t.getTokenGenerationTime());
 			obj.setTokenId(t.getTokenId());
+			obj.setCount(t.getCount());
 			obj.setServiceDescription(t.getService().getServiceName());
 			list2.add(obj);
 			if (t.getStatus().equals("ACTIVE") && t.getCount()>0) {
@@ -76,6 +77,7 @@ public class TokenController {
 			obj.setStatus(t.getStatus());
 			obj.setTokenGenerationTime(t.getTokenGenerationTime());
 			obj.setTokenId(t.getTokenId());
+			obj.setCount(t.getCount());
 			obj.setServiceDescription(t.getService().getServiceName());
 			list2.add(obj);
 			if (t.getStatus().equals("WAITING") && t.getCount()>0) {
@@ -100,6 +102,7 @@ public class TokenController {
 			obj.setStatus(t.getStatus());
 			obj.setTokenGenerationTime(t.getTokenGenerationTime());
 			obj.setTokenId(t.getTokenId());
+			obj.setCount(t.getCount());
 			obj.setServiceDescription(t.getService().getServiceName());
 			list2.add(obj);
 			if (t.getStatus().equals("ACTIVE") && t.getCount()>0) {
