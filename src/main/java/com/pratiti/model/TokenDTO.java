@@ -3,12 +3,27 @@ package com.pratiti.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class TokenDTO{
     private int tokenId;
 
+    @DateTimeFormat(style = "hh:mm")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="hh:mm")
     private Date expectedWaitTime;
     
+
+    @DateTimeFormat(style = "hh:mm")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="hh:mm")
     private Date tokenGenerationTime;
+    
     private String serviceDescription;
     private String status;
     private int count;

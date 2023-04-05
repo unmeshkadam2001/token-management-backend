@@ -30,6 +30,8 @@ public class TokenController {
 	@PostMapping("/generateToken")
 	public Integer insertTokenInDatabase(@RequestBody TokenDetails tokenDetails) {
 		System.out.println("we are inside generating token");
+		System.out.println(tokenDetails.getExpectedWaitTime());
+		System.out.println(tokenDetails.getTokenGenerationTime());
 		return tokenService.generateToken(tokenDetails);
 	}
 
@@ -153,19 +155,20 @@ public class TokenController {
 	}
 
 	
-	@GetMapping("/requestingSpecificTokenBasedOnTokenId")
-	public TokenDTO requestingSpecificTokenBasedOnTokenId(@RequestParam("tokenId") Integer tokenId) {
-		TokenDetails tokenDetails = new TokenDetails();
-		tokenDetails = tokenService.requestingSpecificTokenBasedOnTokenId(tokenId);
-		TokenDTO tokenDTO = new TokenDTO();
-		tokenDTO.setTokenId(tokenDetails.getTokenId());
-		tokenDTO.setTokenGenerationTime(tokenDetails.getTokenGenerationTime());
-		tokenDTO.setServiceId(tokenDetails.getService().getServiceId());
-		tokenDTO.setServiceDescription(tokenDetails.getService().getServiceName());
-		tokenDTO.setStatus(tokenDetails.getStatus());
-		tokenDTO.setExpectedWaitTime(tokenDetails.getExpectedWaitTime());
-		return tokenDTO;
-	}
+//	@GetMapping("/requestingSpecificTokenBasedOnTokenId")
+//	public TokenDTO requestingSpecificTokenBasedOnTokenId(@RequestParam("tokenId") Integer tokenId) {
+//		TokenDetails tokenDetails = new TokenDetails();
+//		tokenDetails = tokenService.requestingSpecificTokenBasedOnTokenId(tokenId);
+//		System.out.println("generate --> "+ tokenDetails.getTokenGenerationTime());
+//		TokenDTO tokenDTO = new TokenDTO();
+//		tokenDTO.setTokenId(tokenDetails.getTokenId());
+//		tokenDTO.setTokenGenerationTime(tokenDetails.getTokenGenerationTime());
+//		tokenDTO.setServiceId(tokenDetails.getService().getServiceId());
+//		tokenDTO.setServiceDescription(tokenDetails.getService().getServiceName());
+//		tokenDTO.setStatus(tokenDetails.getStatus());
+//		tokenDTO.setExpectedWaitTime(tokenDetails.getTokenGenerationTime());
+//		return tokenDTO;
+//	}
 	
 
 }

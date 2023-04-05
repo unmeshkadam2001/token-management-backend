@@ -85,10 +85,10 @@ public class TokenService {
 		
 	}
 
-	public TokenDetails requestingSpecificTokenBasedOnTokenId(Integer tokenId) {
-		TokenDetails tokenDetails = tokenDetailsRepo.findById(tokenId).get();
-		return tokenDetails;
-	}
+//	public TokenDetails requestingSpecificTokenBasedOnTokenId(Integer tokenId) {
+//		TokenDetails tokenDetails = tokenDetailsRepo.findById(tokenId).get();
+//		return tokenDetails;
+//	}
 
 
 	
