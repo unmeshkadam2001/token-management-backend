@@ -22,11 +22,12 @@ public class TokenService {
 	@Autowired
 	private ServiceTypeRepository serviceTypeRepository;
 	
-	public String generateToken(TokenDetails tokenDetails) {
+	public Integer generateToken(TokenDetails tokenDetails) {
 		System.out.println("we are inside service of generate token");
 		tokenDetails.setCount(0);
+		tokenDetails.setExpectedWaitTime(tokenDetails.getTokenGenerationTime());
 		tokenDetailsRepo.save(tokenDetails);
-		return "Token Generated Succesfully!  Your Token Id is: "+ tokenDetails.getTokenId();
+		return tokenDetails.getTokenId();
 	}
 
 	public List<TokenDetails> queueOfTokens(Integer counterId) {
@@ -78,6 +79,11 @@ public class TokenService {
 		tokenDetailsRepo.save(tokenDetails);
 		return "status of token with token id "+ tokenId + " is changed to processing.";
 		
+	}
+
+	public TokenDetails requestingSpecificTokenBasedOnTokenId(Integer tokenId) {
+		TokenDetails tokenDetails = tokenDetailsRepo.findById(tokenId).get();
+		return tokenDetails;
 	}
 
 

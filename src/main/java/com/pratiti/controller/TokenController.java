@@ -28,7 +28,7 @@ public class TokenController {
 	private TokenService tokenService;
 
 	@PostMapping("/generateToken")
-	public String insertTokenInDatabase(@RequestBody TokenDetails tokenDetails) {
+	public Integer insertTokenInDatabase(@RequestBody TokenDetails tokenDetails) {
 		System.out.println("we are inside generating token");
 		return tokenService.generateToken(tokenDetails);
 	}
@@ -149,5 +149,20 @@ public class TokenController {
 		return msg;
 	}
 
+	
+	@GetMapping("/requestingSpecificTokenBasedOnTokenId")
+	public TokenDTO requestingSpecificTokenBasedOnTokenId(@RequestParam("tokenId") Integer tokenId) {
+		TokenDetails tokenDetails = new TokenDetails();
+		tokenDetails = tokenService.requestingSpecificTokenBasedOnTokenId(tokenId);
+		TokenDTO tokenDTO = new TokenDTO();
+		tokenDTO.setTokenId(tokenDetails.getTokenId());
+		tokenDTO.setTokenGenerationTime(tokenDetails.getTokenGenerationTime());
+		tokenDTO.setServiceId(tokenDetails.getService().getServiceId());
+		tokenDTO.setServiceDescription(tokenDetails.getService().getServiceName());
+		tokenDTO.setStatus(tokenDetails.getStatus());
+		tokenDTO.setExpectedWaitTime(tokenDetails.getExpectedWaitTime());
+		return tokenDTO;
+	}
+	
 
 }

@@ -52,15 +52,6 @@ public class TokenDetails {
     private TokenQueue tokenQueue;
     
     private Integer count;
-    
-
-    public Integer getCount() {
-		return count;
-	}
-
-	public void setCount(Integer count) {
-		this.count = count;
-	}
 
 	public int getTokenId() {
 		return tokenId;
@@ -74,7 +65,7 @@ public class TokenDetails {
 		return expectedWaitTime;
 	}
 
-	public void setExpectedWaitTime(Time expectedWaitTime) {
+	public void setExpectedWaitTime(Date expectedWaitTime) {
 		this.expectedWaitTime = expectedWaitTime;
 	}
 
@@ -109,7 +100,17 @@ public class TokenDetails {
 	public void setTokenQueue(TokenQueue tokenQueue) {
 		this.tokenQueue = tokenQueue;
 	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
     
+
+   
 
 }
 
