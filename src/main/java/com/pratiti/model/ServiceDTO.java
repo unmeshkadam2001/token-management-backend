@@ -5,8 +5,7 @@ package com.pratiti.model;
 public class ServiceDTO {
 	private Integer id;
 	 private String serviceName;
-     private String statusOfService;
-     
+     private String statusOfService;     
      
 	public Integer getId() {
 		return id;
